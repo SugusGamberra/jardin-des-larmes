@@ -1,0 +1,593 @@
+/*VARIABLES Y BASE
+puedes leer ambos css, pero son lo mismo salvo ciertos minimos cambios... este es el q ira
+mas comentado, el otro lo dejo tal cual xk hice un copypaste d este alli y solo cambie cosillas*/
+:root {
+    --fondo: #f4eae6;
+    --rojo: #b05c49;
+    --texto-claro: #f5f4f3;
+    --fuente-titulos: 'Tilt Warp', sans-serif;
+    --fuente-mono: 'Space Mono', monospace;
+    --fuente-dibujada: 'Patrick Hand', cursive;
+}
+/*reseteo universal d todo para q no se descuadre nada*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*estilos generales del body*/
+body {
+    background-color: var(--fondo);
+    color: var(--texto-claro);
+    font-family: var(--fuente-titulos);
+}
+/*UTILIDADES GLOBALES
+uso mix-blend-mode difference para q el texto invierta el color segun lo que tenga debajo*/
+.texto-negativo {
+    mix-blend-mode: difference;
+    color: #fff;
+}
+/*fuente titular: agrupo los elementos clave q quiero obligatoriamente en mayusuculas*/
+.logo-principal, .portada__eslogan, .titulo-coleccion, .pie-logo {
+    text-transform: uppercase;
+}
+/*fuente mono en mayus*/
+.titulo-seccion, .enlace-nav, .texto-central, .texto-tip, .boton-carrito span,
+.pie-top, .pie-legales, .producto-textos h3 {
+    font-family: var(--fuente-mono);
+    text-transform: uppercase;
+}
+/*fuente mono (sin forzar mayusculas)*/
+.texto-diferencia, .producto-textos p, .derechos-autor {
+    font-family: var(--fuente-mono);
+}
+/*tamaño d texto pequeño estandar*/
+.enlace-nav, .texto-central, .boton-carrito span, .pie-top, .pie-legales, .derechos-autor {
+    font-size: 0.85rem;
+}
+/*espaciado d letras para enlaces y logo*/
+.logo-principal, .enlace-nav, .texto-tip, .pie-top {
+    letter-spacing: 1px;
+}
+/*aqui empiezo a usar clamp como te comente, para q el tamaño se adapte a pantallas y tal, aunque mas abajo veras
+q uso el media respetando lo q pides en el trabajo, gracias x la libertad creativa!!*/
+.titulo-seccion {
+    color: var(--rojo);
+    font-size: clamp(1rem, 2vw, 2rem);
+}
+/*CUBO 3D INVISIBLE
+meto una perspectiva bestial para q el efecto 3d tenga profundidad y oculto lo q sobresalga*/
+.mascara-contenedor {
+    perspective: 200000px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+/*activo el preserve-3d para q respete el espacio tridimensional y le meto una transicion suave con curva cubica d bezier*/
+.portada__carrusel-fondo {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translateZ(-50vh); 
+    transition: transform 2.2s cubic-bezier(0.37, 0, 0.63, 1);
+}
+/*cada cara ocupa toda la pantalla y oculto la parte d atras para q no traspasen las imagnes*/
+.diapositiva {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    backface-visibility: hidden; 
+}
+/*posiciono cada diapo rotandola en el eje x y moviendola adelante con translate z para formar el cubo*/
+.diapositiva:nth-child(1) { transform: rotateX(0deg) translateZ(50vh); }
+.diapositiva:nth-child(2) { transform: rotateX(-90deg) translateZ(50vh); }
+.diapositiva:nth-child(3) { transform: rotateX(-180deg) translateZ(50vh); }
+.diapositiva:nth-child(4) { transform: rotateX(-270deg) translateZ(50vh); }
+/* CABECERA Y NAV
+flotante y arriba del todo con sus margenes laterales y separacion entre los bloques*/
+.cabecera {
+    position: fixed; 
+    top: 2rem;
+    left: 2.5rem;
+    right: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 100;
+}
+/*agrupo los contenedores laterales y las litsas para ordenarlos en columna con flexbox*/
+.cabecera__izquierda, .cabecera__derecha, .cabecera__nav {
+    display: flex;
+    flex-direction: column;
+}
+.cabecera__nav {
+    gap: 0.3rem;
+}
+/*heredan el color, quitan el subrayado y ajustan el ancho al texto exacto*/
+.enlace-nav {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    width: max-content;
+}
+/*alineo a la dcha y giro el texto para q encaje simetricamente con el diseño*/
+.cabecera__derecha .enlace-nav {
+    align-self: flex-end;
+    text-align: right;
+}
+/*ANIMACION GARABATO HOVER 
+posiciono el svg del garabato d forma absoluta justo encima d los enlaces, centrandolo y rotandolo un poqito*/
+.garabato {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: 50%;
+    width: 120%;
+    height: 1.5em;
+    transform: translate(-50%, -48%) rotate(-2deg);
+    fill: none;
+    stroke: var(--rojo);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1 1.1;
+    stroke-dashoffset: 1.05;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+    pointer-events: none;
+}
+/*con esto al psar el raton x encima se dibuja el garabato y al quitarlo se borra*/
+a:hover > .garabato {
+    stroke-dashoffset: 0;
+}
+/*LOGO CABECERA*/
+.logo-principal {
+    font-size: clamp(1.2rem, 1.5vw, 1.8rem);
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+/*CARITA TRISTE (cabecera: aparece en hover / footer: siempre visible)*/
+.carita-triste {
+    display: inline-block;
+    color: var(--rojo);
+    font-family: var(--fuente-dibujada);
+    font-size: 1.8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+/*a la carita le meto una animacion con tembleque, y weno al pasarle el raton se pone visible*/
+.logo-principal:hover .carita-triste,
+.pie-logo .carita-triste {
+    opacity: 1;
+    visibility: visible;
+    animation: temblor-trazado 0.15s steps(3, end) infinite;
+}
+.pie-logo .carita-triste {
+    font-size: 0.6em;
+    bottom: 0.25em;
+}
+@keyframes temblor-trazado {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    33% { transform: rotate(-2deg) scale(1.02); }
+    66% { transform: rotate(2deg) scale(0.98); }
+}
+/*SECCION PORTADA*/
+.seccion-portada {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.portada__contenido {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 4vw;
+    z-index: 10;
+}
+.portada__eslogan {
+    align-self: flex-end;
+    text-align: right;
+    font-size: clamp(2rem, 5vw, 5rem);
+    line-height: 0.85;
+    margin-top: 10vh;
+    margin-bottom: auto;
+}
+/*BLOQUE COLECCION Y MASCARAS
+superpongo la capa base en blanco y negro con la capa mascara recortada y el papel roto x encima para lograr el efecto editorial*/
+.capa-base, .capa-mascara {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.capa-base img, .capa-mascara img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.capa-base img {
+    filter: grayscale(100%);
+}
+.capa-mascara {
+    z-index: 3;
+    -webkit-mask-image: url('/img/mask.webp');
+    mask-image: url('/img/mask.webp');
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    pointer-events: none;
+}
+.diapositiva::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: url('/img/papel-roto.webp') center / cover no-repeat;
+    pointer-events: none;
+}
+.portada__info-coleccion {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.titulo-coleccion {
+    font-size: clamp(3rem, 10vw, 12rem);
+    line-height: 0.8;
+    text-align: center;
+    white-space: nowrap;
+}
+.titulo-coleccion--base { color: var(--texto-claro); }
+.titulo-coleccion--rojo { color: var(--rojo); }
+/*ENLCAE VER COLECCION*/
+.enlace-coleccion {
+    position: absolute;
+    bottom: 2vh;
+    left: 0;
+    right: 0;
+    width: max-content;
+    margin: 0 auto;
+    text-decoration: none;
+}
+.texto-diferencia {
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    white-space: nowrap;
+    letter-spacing: 2px;
+    display: block;
+    position: relative;
+    z-index: 0;
+}
+/*SECCION NUEVOS
+css grid con autofit y minmax para q las tarjetas se adapten sin tener q meterlas en media queries*/
+.seccion-nuevos {
+    padding: 6rem 4vw 2rem;
+    position: relative;
+    z-index: 1;
+    background-color: var(--fondo);
+}
+.seccion-nuevos .titulo-seccion {
+    margin-bottom: 4rem;
+}
+.cuadricula-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+.tarjeta-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.producto-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+.producto-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.producto-textos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.producto-textos h3, .producto-textos p {
+    font-size: 1rem; 
+}
+.producto-textos h3 {
+    line-height: 0.9;
+}
+/*BOTON CARRITO*/
+.boton-carrito {
+    position: relative;
+    width: 130px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.boton-fondo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.boton-carrito span {
+    position: relative;
+    z-index: 2;
+    color: var(--texto-claro);
+    text-align: center;
+    line-height: 1.1;
+}
+/*ANIMACION SCROLL CABECERA
+reorganizo el menu y escalo el logo*/
+.cabecera.desplazada .cabecera__nav {
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+}
+.cabecera.desplazada .logo-principal {
+    transform: scale(0.65) translateY(-15px);
+    transition: transform 0.5s ease;
+}
+.cabecera.desplazada .enlace-nav:nth-child(2) { animation: curva-pequena 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.cabecera.desplazada .enlace-nav:nth-child(3) { animation: curva-grande 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.cabecera.desplazada-inversa .enlace-nav:nth-child(2) { animation: curva-pequena-inversa 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.cabecera.desplazada-inversa .enlace-nav:nth-child(3) { animation: curva-grande-inversa 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+@keyframes curva-pequena { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(15px, 25px); } }
+@keyframes curva-grande { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(30px, 45px); } }
+@keyframes curva-pequena-inversa { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-15px, 25px); } }
+@keyframes curva-grande-inversa { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-30px, 45px); } }
+/*SECCIONV IDEO
+hago un contenedor bien alto para el scroll con un elemento sticky q fija el video y al scrollear expande la
+mascara del corazon (o contrae si es al reves)*/
+.jdl-movimiento {
+    height: 300vh;
+    position: relative;
+    z-index: 102;
+    margin-top: -2rem; 
+}
+.video-contenedor {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--fondo);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.video-contenedor .titulo-seccion {
+    position: absolute;
+    top: 6rem;
+    left: 4vw; 
+    z-index: 10;
+}
+.texto-central, .texto-tip {
+    position: absolute;
+    pointer-events: none;
+}
+.texto-central {
+    top: 15%; 
+    width: 70%; 
+    max-width: 900px; 
+    text-align: center;
+    line-height: 1.6;
+    z-index: 10;
+}
+.texto-tip {
+    bottom: 38%; 
+    font-size: 0.75rem;
+    z-index: 9;
+}
+.video-contenedor video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: url('/img/corazon.png'); 
+    mask-image: url('/img/corazon.png');
+    -webkit-mask-position: center 40%;
+    mask-position: center 40%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: expandir-corazon linear both;
+    z-index: 10;
+}
+@keyframes expandir-corazon {
+    0% { -webkit-mask-size: 15vw; mask-size: 15vw; }
+    100% { -webkit-mask-size: 300vw; mask-size: 300vw; }
+}
+/*FOOTER
+lo monto con capas absolutas para el fondo del papel y la modelo
+el contenido queda x encima y añade soporte para reducir el movimineto*/
+.pie-pagina {
+    position: relative;
+    z-index: 200; 
+    width: 100%;
+    overflow: hidden;
+    color: var(--texto-claro);
+    margin-top: -9vh; 
+}
+.pie-fondo, .pie-modelo {
+    position: absolute;
+    z-index: 1;
+}
+.pie-fondo {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+.pie-modelo {
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 80vh; 
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none; 
+}
+.pie-contenido {
+    position: relative;
+    z-index: 10; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10rem 4vw 2rem 4vw; 
+    gap: 8rem; 
+}
+.pie-pagina a {
+    color: var(--texto-claro);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+.pie-pagina a:hover {
+    opacity: 0.6;
+}
+.pie-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.pie-nav-izq {
+    display: grid;
+    grid-template-columns: repeat(4, auto); 
+    gap: 1rem 3vw; 
+}
+.pie-nav-der {
+    display: flex;
+    gap: 3vw; 
+}
+.pie-centro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1; 
+    pointer-events: none;
+}
+.pie-logo {
+    font-size: clamp(6rem, 9vw, 20rem); 
+    line-height: 0.8;
+}
+.pie-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.pie-suscripcion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+}
+.pie-suscripcion-btn {
+    font-family: var(--fuente-titulos);
+    font-size: clamp(3rem, 4vw, 4rem);
+    color: var(--texto-claro);
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+.pie-suscripcion-btn:hover {
+    opacity: 0.7;
+}
+.pie-legales {
+    display: flex;
+    gap: 2vw; 
+}
+@media (prefers-reduced-motion: reduce) {
+    .garabato, 
+    .logo-principal:hover .carita-triste,
+    .pie-logo .carita-triste {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+/*BOTON CAMBIO D TEMA
+boton flotante fijo abajo a la dcha*/
+.boton-tema {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background-color: var(--fondo);
+    border: 2px solid var(--rojo);
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.boton-tema:hover {
+    transform: scale(1.1);
+    background-color: var(--rojo);
+}
+.boton-tema img {
+    width: 28px;
+    height: 28px;
+    transition: filter 0.3s ease;
+}
+.boton-tema:hover img {
+    filter: brightness(0) invert(1); 
+}
+/*menu hamburguesa oculto en escritoroi*/
+.menu-hamburguesa {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--texto-claro);
+    cursor: pointer;
+}
+/* media query clasica para cuando baje de resolucoin ocultando menus laterales y mostrando la hamburguesa
+muevo el logo a la izq tb*/
+@media (max-width: 768px) {
+    .cabecera__izquierda .cabecera__nav,
+    .cabecera__derecha .cabecera__nav {
+        display: none;
+    }
+    .menu-hamburguesa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .cabecera {
+        justify-content: space-between;
+        align-items: center;
+        left: -3rem;
+        right: 1.5rem;
+    }
+}

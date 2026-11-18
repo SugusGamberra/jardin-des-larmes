@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardin des Larmes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Tilt+Warp&display=swap" rel="stylesheet">
+    <!-- le he metido id para cambiar el css con un poco de js -->
+    <link id="link-estilos" rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- cabecera, uso texto-negativo para q el color haga contraste automatico con las fotos del carrusel-->
+    <header class="cabecera texto-negativo">
+        <!--menu izq: los enlaces tienen un garabato svg q animo al pasar el raton
+        el svg lo hice en https://yqnn.github.io/svg-path-editor/ probando lo q mas m convencia de a poco-->
+        <div class="cabecera__izquierda">
+            <nav class="cabecera__nav">
+                <a href="#" class="enlace-nav">Menú +<svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M5,15 Q30,5 95,15 Q60,30 10,20 Q45,10 90,25" pathLength="1"></path></svg></a>
+                <a href="#" class="enlace-nav">Ver todo +<svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M5,20 Q40,10 95,18 Q50,28 15,22 Q60,15 90,26" pathLength="1"></path></svg></a>
+                <a href="#" class="enlace-nav">Categorías +<svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M10,18 Q45,5 90,15 Q40,30 5,20 Q55,12 95,25" pathLength="1"></path></svg></a>
+            </nav>
+        </div>
+        <!--logo: le separo la cara triste en un span xk le quiero dar vidilla independiente en los estilos-->
+        <div class="cabecera__centro">
+            <a href="#" class="logo-principal">Jardin des Larmes <span class="carita-triste">:,(</span></a>
+        </div>
+        <!--menu drcho: mointado igual q el izquierod-->
+        <div class="cabecera__derecha">
+            <nav class="cabecera__nav">
+                <a href="#" class="enlace-nav">Carrito . 0<svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M5,15 Q30,5 95,15 Q60,30 10,20 Q45,10 90,25" pathLength="1"></path></svg></a>
+                <a href="#" class="enlace-nav">Buscar +<svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M10,18 Q45,5 90,15 Q40,30 5,20 Q55,12 95,25" pathLength="1"></path></svg></a>
+                <a href="#" class="enlace-nav">Favoritos . 0<svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M5,20 Q40,10 95,18 Q50,28 15,22 Q60,15 90,26" pathLength="1"></path></svg></a>
+            </nav>
+        </div>
+        <!--botno hamburguesa resposnivb, no es funcional era x usar el media querie clasico sin el clamp-->
+        <button class="menu-hamburguesa" aria-label="Abrir menú">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </header>
+    <!-- portada: uso un contenedor con perspective en CSS para darle el volumen 3D al carrusel-->
+    <main class="seccion-portada">
+        <div class="mascara-contenedor">
+            <!--es un cubo invisible que voy a hacer rotar en el eje x usando JS-->
+            <div class="portada__carrusel-fondo">
+                <!--diapositiva 1: cada cara del cubo se divide en dos capas superpuestas para q en una lleve el
+                blanco y negro y en la otra lleve la imagen a color-->
+                <div class="diapositiva">
+                    <div class="capa-base">
+                        <img src="/img/jardin.png" alt="Jardin des Larmes" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--base txt-carrusel">JARDIN DES<br>LARMES</h2></div>
+                    </div>
+                    <div class="capa-mascara">
+                        <img src="/img/jardin.png" alt="Jardin des Larmes" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--rojo txt-carrusel">JARDIN DES<br>LARMES</h2></div>
+                    </div>
+                </div>
+                <!--diapo 2-->
+                <div class="diapositiva">
+                    <div class="capa-base">
+                        <img src="/img/solsticio.png" alt="Solstice d'été" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--base txt-carrusel">SOLSTICE<br>D'ÉTÉ</h2></div>
+                    </div>
+                    <div class="capa-mascara">
+                        <img src="/img/solsticio.png" alt="Solstice d'été" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--rojo txt-carrusel">SOLSTICE<br>D'ÉTÉ</h2></div>
+                    </div>
+                </div>
+                <!--diapo 3-->
+                <div class="diapositiva">
+                    <div class="capa-base">
+                        <img src="/img/noche.png" alt="Nuit des fées" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--base txt-carrusel">NUIT DES<br>FÉES</h2></div>
+                    </div>
+                    <div class="capa-mascara">
+                        <img src="/img/noche.png" alt="Nuit des fées" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--rojo txt-carrusel">NUIT DES<br>FÉES</h2></div>
+                    </div>
+                </div>
+                <!--diapo 4-->
+                <div class="diapositiva">
+                    <div class="capa-base">
+                        <img src="/img/bosque.png" alt="Forêt enchantée" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--base txt-carrusel">FORÊT<br>ENCHANTÉE</h2></div>
+                    </div>
+                    <div class="capa-mascara">
+                        <img src="/img/bosque.png" alt="Forêt enchantée" class="img-carrusel">
+                        <div class="portada__info-coleccion"><h2 class="titulo-coleccion titulo-coleccion--rojo txt-carrusel">FORÊT<br>ENCHANTÉE</h2></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--superpongo el texto a todo el bloque del 3d y con el id para que el script sepa donde tiene q inyectar grunge o goth-->
+        <div class="portada__contenido texto-negativo">
+            <h1 class="portada__eslogan" id="eslogan-portada">WHERE ECO<br>MEETS GRUNGE</h1>
+            <!--cta-->
+            <a href="#coleccion" class="enlace-coleccion texto-negativo">
+                <span class="texto-diferencia">[ VER COLECCIÓN ]</span>
+                <svg class="garabato" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M5,20 Q40,10 95,18 Q50,28 15,22 Q60,15 90,26" pathLength="1"></path></svg>
+            </a>
+        </div>
+    </main>
+    <!--novedades:tiro d css grid para q las columnas se monten solas segun el ancho de la pantalla
+    sin volverme loca con media queries -->
+    <section class="seccion-nuevos" id="nuevos">
+        <h2 class="titulo-seccion">00. NOVEDADES</h2>
+        <div class="cuadricula-productos">
+            <!--este es el patron reutilizable,la misma estructura exacta me vale para todas las secciones de la tienda
+            este patron se repite para el resto d productos-->
+            <article class="tarjeta-producto">
+                <!--la imagen lleva aspect-ratio fijo y object-fit en el CSS para que ninguna foto d modelo se deforme ni
+                m descuadre la rejilla-->
+                <img src="/img/blusa.webp" alt="Blusa sostenible" class="producto-img">
+                <!--aqui meto flexbox para empujar los textos a la izquierda y el boton a la derecha 
+                dejandolo todo alineado por abajo -->
+                <div class="producto-info">
+                    <div class="producto-textos texto-negativo">
+                        <h3 class="txt-producto">Blusa Sostenible</h3><p>45.00 €</p>
+                    </div>
+                    <!--le meto una imagen de fondo absoluta para que parezca una mancha sin ensuciar el html-->
+                    <button class="boton-carrito"><img src="/img/boton.webp" alt="Fondo botón" class="boton-fondo"><span class="texto-negativo">Añadir<br>al carrito</span></button>
+                </div>
+            </article>
+            <article class="tarjeta-producto">
+                <img src="/img/top.webp" alt="Top sostenible" class="producto-img">
+                <div class="producto-info">
+                    <div class="producto-textos texto-negativo">
+                        <h3 class="txt-producto">Top Sostenible</h3><p>55.00 €</p>
+                    </div>
+                    <button class="boton-carrito"><img src="/img/boton.webp" alt="Fondo botón" class="boton-fondo"><span>Añadir<br>al carrito</span></button>
+                </div>
+            </article>
+            <article class="tarjeta-producto">
+                <img src="/img/sueter.webp" alt="Suéter sostenible" class="producto-img">
+                <div class="producto-info">
+                    <div class="producto-textos texto-negativo">
+                        <h3 class="txt-producto">Suéter Sostenible</h3><p>40.00 €</p>
+                    </div>
+                    <button class="boton-carrito"><img src="/img/boton.webp" alt="Fondo botón" class="boton-fondo"><span>Añadir<br>al carrito</span></button>
+                </div>
+            </article>
+            <article class="tarjeta-producto">
+                <img src="/img/sudadera.webp" alt="Sudadera sostenible" class="producto-img">
+                <div class="producto-info">
+                    <div class="producto-textos texto-negativo">
+                        <h3 class="txt-producto">Sudadera Sostenible</h3><p>60.00 €</p>
+                    </div>
+                    <button class="boton-carrito"><img src="/img/boton.webp" alt="Fondo botón" class="boton-fondo"><span>Añadir<br>al carrito</span></button>
+                </div>
+            </article>
+        </div>
+    </section>
+    <!--uso view timeline para animar el video, lo veras en el pdf expuesto-->
+    <section class="jdl-movimiento" id="video" style="view-timeline-name: --revelado-video; view-timeline-axis: block;">
+        <div class="video-contenedor">
+            <h2 class="titulo-seccion">01. JDL EN MOVIMIENTO</h2>
+            <p class="texto-central texto-negativo">Experimenta el movimiento de Jardin des Larmes a través de nuestro corto. Nuestro viaje recogido en un vídeo donde el camino que hemos recorrido trae a la vida el espíritu artístico, romántico y ecológico detrás de cada colección. Contempla como nuestro diseño se inspira en el estilo gótico y cuenta historias de individualidad, fuerza, rebeldía y sostenibilidad.</p>
+            <video src="/media/video.mp4" autoplay loop muted playsinline style="animation-timeline: --revelado-video; animation-range: entry 100% exit 0%;"></video>
+            <p class="texto-tip texto-negativo">Tip: scroll to feel it</p>
+        </div>
+    </section>
+    <!--footer montado x capas usando posicionamiento absoluto para las imagenes y relativo para el texto -->
+    <footer class="pie-pagina" id="pie-pagina">
+        <!--el fondo, q enn el CSS le puse object-position: top center para que no se corte al ensanchar la pantalla-->
+        <img src="/img/footer.webp" alt="Fondo Footer" class="pie-fondo">
+        <!--aqui le pongo la clase img-footer para que mi script de js sepa q foto cambiar al pasar al modo goth-->
+        <img src="/img/hada.png" alt="Modelo Footer" class="pie-modelo img-footer">
+        <!--position: relative y con z-index alto para quedar por encima de las dos imágenes anteriores
+        en el logo he intentado meter el texto-negativo pero no sale, no se me ocurre nada mas x el momento-->
+        <div class="pie-contenido">
+            <div class="pie-top">
+                <nav class="pie-nav-izq"><a href="#">Comprar</a><a href="#">Categorías</a><a href="#">Quiénes somos</a><a href="#">Campaña</a><a href="#">Contacto</a><a href="#">Colecciones</a><a href="#">Novedades</a></nav>
+                <nav class="pie-nav-der"><a href="#">Devoluciones</a><a href="#">Envíos</a><a href="#">Pagos</a><a href="#">FAQ</a></nav>
+            </div>
+            <div class="pie-centro">
+                <h2 class="pie-logo texto-negativo">JARDIN DES<br> LARMES <span class="carita-triste">:,(</span></h2>
+            </div>
+            <div class="pie-bottom">
+                <div class="pie-suscripcion">
+                    <!--inicialmente puse esto para el reto pero con el video lo tuve q meter tb, ya lo deje asi hahaha-->
+                    <p class="pie-directo" style="color: var(--texto-claro); font-family: var(--fuente-dibujada);">Recibe nuestras novedades y promos:</p>
+                    <button class="pie-suscripcion-btn">SUSCRÍBETE</button>
+                    <p class="derechos-autor">&copy; 2026 <a href="https://github.com/SugusGamberra" target="_blank">SugusGamberra</a></p>
+                </div>
+                <nav class="pie-legales"><a href="#">Política de privacidad</a><a href="#">Uso de cookies</a><a href="#">RRSS</a></nav>
+            </div>
+        </div>
+    </footer>
+    <!--boton d cambio d tema, como entendi q pedias 2 css pues he dicho d ponerlos con cambios pero q lo puedas ver de golpe
+    directamente-->
+    <button id="btn-tema" class="boton-tema" aria-label="Cambiar tema">
+        <img src="/img/luna.svg" alt="Tema Luna" class="icono-luna">
+        <img src="/img/sol.svg" alt="Tema Sol" class="icono-sol" style="display: none;">
+    </button>
+    <script>
+        /*js carrusel y cabecera
+        roto el cubo d la portada cada 8 segundos sumando 90 grados al eje x
+        controlo el scroll d la cabecera,si bajo mas d 50px la encojo y si subo la devuelvo a la posicion inicial
+        con transiciones suaves*/
+        const carrusel = document.querySelector('.portada__carrusel-fondo');
+        let anguloActual = 0;
+        setInterval(() => {
+            anguloActual += 90; 
+            carrusel.style.transform = `translateZ(-50vh) rotateX(${anguloActual}deg)`;
+        }, 8000);
+        const cabecera = document.querySelector('.cabecera');
+        window.addEventListener('scroll', () => {
+            const desplazamientoActual = window.scrollY;
+            if (desplazamientoActual > 50) {
+                if (!cabecera.classList.contains('desplazada')) {
+                    cabecera.classList.add('desplazada');
+                    cabecera.classList.remove('desplazada-inversa');
+                }
+            } else {
+                if (cabecera.classList.contains('desplazada')) {
+                    cabecera.classList.remove('desplazada');
+                    cabecera.classList.add('desplazada-inversa');
+                    setTimeout(() => { cabecera.classList.remove('desplazada-inversa'); }, 700);
+                }
+            }
+        });
+        /*botn del cambio d tema
+        hago un diccionario para meter todo lo q tiene q cambiar par no duplicar html*/
+        const btnTema = document.getElementById('btn-tema');
+        const linkEstilos = document.getElementById('link-estilos');
+        const iconoSol = document.querySelector('.icono-sol');
+        const iconoLuna = document.querySelector('.icono-luna');
+        //tema goth
+        const temaGoth = {
+            css: 'estilos-alt.css',
+            imgCarrusel: ['/img/fleurs.png', '/img/amour.png', '/img/rossignol.png', '/img/sel.png'],
+            textCarrusel: ['POITRINE DE<br>FLEURS', 'MON<br>AMOUR', 'NACHTIGALLEN<br>SEHNEN', 'GOÛT DE<br>SEL'],
+            imgProductos: ['/img/camisa.png', '/img/corset.png', '/img/falda.webp', '/img/sueter.jpg'],
+            textProductos: ['Camisa Sostenible', 'Corset Sostenible', 'Falda Sostenible', 'Suéter Sostenible'],
+            imgFooter: '/img/footer.png',
+            textEslogan: 'WHERE ECO<br>MEETS GOTH'
+        };
+        //tema fairy q arranca x defecto
+        const temaFairy = {
+            css: 'estilos.css',
+            imgCarrusel: ['/img/jardin.png', '/img/solsticio.png', '/img/noche.png', '/img/bosque.png'],
+            textCarrusel: ['JARDIN DES<br>LARMES', "SOLSTICE<br>D'ÉTÉ", 'NUIT DES<br>FÉES', 'FORÊT<br>ENCHANTÉE'],
+            imgProductos: ['/img/blusa.webp', '/img/top.webp', '/img/sueter.webp', '/img/sudadera.webp'],
+            textProductos: ['Blusa Sostenible', 'Top Sostenible', 'Suéter Sostenible', 'Sudadera Sostenible'],
+            imgFooter: '/img/hada.png',
+            textEslogan: 'WHERE ECO<br>MEETS GRUNGE'
+        };
+        let esFairy = true;
+        /* al clicar en el boton flotante invierto el estado y aplico los camvios d todo a la vez*/
+        btnTema.addEventListener('click', () => {
+            esFairy = !esFairy;
+            const temaActivo = esFairy ? temaFairy : temaGoth;
+            linkEstilos.setAttribute('href', temaActivo.css);
+            iconoSol.style.display = esFairy ? 'none' : 'block';
+            iconoLuna.style.display = esFairy ? 'block' : 'none';
+            document.querySelectorAll('.diapositiva').forEach((diapo, i) => {
+                diapo.querySelectorAll('img.img-carrusel').forEach(img => img.src = temaActivo.imgCarrusel[i]);
+                diapo.querySelectorAll('.txt-carrusel').forEach(txt => txt.innerHTML = temaActivo.textCarrusel[i]);
+            });
+            document.querySelectorAll('.tarjeta-producto').forEach((tarjeta, i) => {
+                tarjeta.querySelector('.producto-img').src = temaActivo.imgProductos[i];
+                tarjeta.querySelector('.txt-producto').textContent = temaActivo.textProductos[i];
+            });
+            document.querySelector('.img-footer').src = temaActivo.imgFooter;
+            document.getElementById('eslogan-portada').innerHTML = temaActivo.textEslogan;
+        });
+    </script>
+</body>
+</html>
