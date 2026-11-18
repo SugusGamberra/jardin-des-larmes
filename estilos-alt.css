@@ -202,8 +202,8 @@ a:hover > .garabato {
 }
 .capa-mascara {
     z-index: 3;
-    -webkit-mask-image: url('/img/mask.webp');
-    mask-image: url('/img/mask.webp');
+    -webkit-mask-image: url('img/mask.webp');
+    mask-image: url('img/mask.webp');
     -webkit-mask-position: center;
     mask-position: center;
     -webkit-mask-size: cover;
@@ -217,7 +217,7 @@ a:hover > .garabato {
     position: absolute;
     inset: 0;
     z-index: 4;
-    background: url('/img/papel-roto.webp') center / cover no-repeat;
+    background: url('img/papel-roto.webp') center / cover no-repeat;
     pointer-events: none;
 }
 .portada__info-coleccion {
@@ -387,8 +387,8 @@ a:hover > .garabato {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    -webkit-mask-image: url('/img/corazon.png'); 
-    mask-image: url('/img/corazon.png');
+    -webkit-mask-image: url('img/corazon.png'); 
+    mask-image: url('img/corazon.png');
     -webkit-mask-position: center 40%;
     mask-position: center 40%;
     -webkit-mask-repeat: no-repeat;
